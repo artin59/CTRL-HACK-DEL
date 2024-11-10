@@ -11,7 +11,6 @@ import goalOwl from './Components/Assets/goalOwl.png';
 import eatingOwl from './Components/Assets/eatingOwl.png';
 import adviceOwl1 from './Components/Assets/adviceOwl1.png';
 import adviceOwlMuscle from './Components/Assets/adviceOwlMuscle.png';
-import bigOwl from './Components/Assets/bigOwl.png';
 
 function App() {
   const [height, setHeight] = useState('');
@@ -33,8 +32,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-
-        <div className="main-page">
         <header>
           {/* Make the title into a button and navigate to the start page */}
           <button className="title-button" onClick={() => window.location.href = '/'}>
@@ -63,15 +60,7 @@ function App() {
           <Route path="/result" element={<ResultPage setCalorie={setCalorie} setSodium={setSodium} setSugar={setSugar} breakfast={breakfast} lunch={lunch} dinner={dinner} snack={snack} mc={mc} goal={goal}/>}/>
         </Routes>
 
-
-        </div>
         
-        <div className="main-page-owl">
-
-        <img src={bigOwl} alt="" className="bigOwlImg"/> 
-
-        </div>
-
       </div>
     </Router>
   );
