@@ -19,27 +19,27 @@ McWrap Chicken & Bacon (Buttermilk Crispy),690,34,1450,58,6,36,Wraps
 McWrap Grilled Chicken & Grilled,500,180,19,30,8,38,Wraps
 McWrap Sweet Chili (Buttermilk Crispy),590,25,1160,64,12,27,Wraps
 McWrap Sweet Chili (Grilled),400,10,1250,46,11,31,Wraps
-Chicken Nuggets (10 Piece),470,30,900,30,0,22,Snack
-Chicken Nuggets (20 Piece),940,60,1800,60,0,44,Snack
-Chicken Nuggets (40 Piece),1880,120,3600,120,0,88,Snack
-Fruit Yogurt Parfait,150,2,80,30,23,4,Snack
-French Fries (Small),230,11,130,30,0,2,Snack
-French Fries (Medium),340,16,260,44,0,4,Snack
-French Fries (Large),803,41,777,98,1,12,Snack
-Apple Slices,15,0,0,4,3,0,Snack
-Ranch Snack Wrap (Buttermilk Crispy),380,21,760,33,2,16,Snack
-Ranch Snack Wrap (Grilled),290,13,820,25,2,19,Snack
-Sausage McMuffin with Egg,450,28,860,30,2,21,Breakfast
-Hotcakes and Sausage,520,24,930,61,14,15,Breakfast
-Egg McMuffin,300,13,750,31,3,17,Breakfast
-Bacon Egg & Cheese McGriddles,460,21,1250,48,15,19,Breakfast
-Sausage McGriddles,420,22,1030,44,15,11,Breakfast
-Big Breakfast,740,48,1560,51,3,28,Breakfast
-Hotcakes,350,9,590,60,14,8,Breakfast
-Egg White Delight,250,8,770,30,3,18,Breakfast
-Hash Browns,150,9,310,15,0,1,Breakfast
-Fruit & Maple Oatmeal,290,4,160,58,32,5,Breakfast
-Fruit & Maple Oatmeal (Without Brown Sugar),260,4,115,49,18,5,Breakfast
+Chicken Nuggets (10 Piece),470,30,900,30,0,22,Side
+Chicken Nuggets (20 Piece),940,60,1800,60,0,44,Side
+Chicken Nuggets (40 Piece),1880,120,3600,120,0,88,Side
+Fruit Yogurt Parfait,150,2,80,30,23,4,Side
+French Fries (Small),230,11,130,30,0,2,Side
+French Fries (Medium),340,16,260,44,0,4,Side
+French Fries (Large),803,41,777,98,1,12,Side
+Apple Slices,15,0,0,4,3,0,Side
+Ranch Side Wrap (Buttermilk Crispy),380,21,760,33,2,16,Side
+Ranch Side Wrap (Grilled),290,13,820,25,2,19,Side
+Sausage McMuffin with Egg,450,28,860,30,2,21,morning
+Hotcakes and Sausage,520,24,930,61,14,15,morning
+Egg McMuffin,300,13,750,31,3,17,morning
+Bacon Egg & Cheese McGriddles,460,21,1250,48,15,19,morning
+Sausage McGriddles,420,22,1030,44,15,11,morning
+Big morning,740,48,1560,51,3,28,morning
+Hotcakes,350,9,590,60,14,8,morning
+Egg White Delight,250,8,770,30,3,18,morning
+Hash Browns,150,9,310,15,0,1,morning
+Fruit & Maple Oatmeal,290,4,160,58,32,5,morning
+Fruit & Maple Oatmeal (Without Brown Sugar),260,4,115,49,18,5,morning
 McCafe Caramel Mocha,320,11,170,45,40,10,Beverage
 Blueberry Pomegranate Smoothie,220,1,40,50,44,2,Beverage
 Minute Maid Apple Juice Box,80,0,15,21,19,0,Beverage

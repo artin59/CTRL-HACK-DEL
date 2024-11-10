@@ -557,7 +557,6 @@ function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, se
       Back
     </button>
 
-
   </div>
 
   <div className="divider"></div>
@@ -566,10 +565,10 @@ function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, se
     <h2>Recommendations</h2>
     <p>Placeholder text for recommendations goes here.</p>
     <Link to="/eating">
-      <button className="next-button" onClick={() => navigate(1)}>
-        Go Next
-      </button>
-    </Link>
+          <button className="next-button" onClick={() => navigate(1)}>
+            Go Next
+          </button>
+        </Link>
   </div>
 </div>
 
