@@ -78,13 +78,13 @@ function StartPage({ setHeight, setWeight, setActiveness }) {
 
   return (
     <div className="start-page">
-      <h1> Welcome to Healthy Habits</h1>
+      <h1 style={{ color:'white'}}> Welcome to Healthy Habits</h1>
       <div className="form-container">
         <div className="owl1">      
           <img src={owl1} alt="" /> 
         </div>
         <div className="forms">
-        <label>Height (cm): </label>
+        <label style={{ color:'white'}}>Height (cm): </label>
         <input
           type="number"
           value={localHeight}
@@ -92,7 +92,7 @@ function StartPage({ setHeight, setWeight, setActiveness }) {
           placeholder="Enter height (cm)"
         />
 
-        <label>Weight (kg): </label>
+        <label style={{ color:'white'}}>Weight (kg): </label>
         <input
           type="number"
           value={localWeight}
@@ -100,7 +100,7 @@ function StartPage({ setHeight, setWeight, setActiveness }) {
           placeholder="Enter weight (kg)"
         />
 
-        <label>Activeness: </label>
+        <label style={{ color:'white'}}>Activeness: </label>
         <select
           value={localActiveness}
           onChange={(e) => setLocalActiveness(e.target.value)}
@@ -166,28 +166,28 @@ function BMIPage({ height, weight, activeness, setBmi, setMc}) {
   return (
     <div className="bmi-page">
       <div className="bmi-page1">
-      <h1>Your BMI</h1>
+      <h1 style={{ color:'white'}}>Your BMI</h1>
       {bmi ? (
         <div>
-          <p>Your BMI is: {bmi}</p>
+          <p style={{ color:'white'}}>Your BMI is: {bmi}</p>
           {/* Add category based on BMI value */}
-          <p>
+          <p style={{ color:'white'}}>
             BMI Category: {bmi < 18.5 ? 'Underweight' : bmi < 24.9 ? 'Normal weight' : bmi < 29.9 ? 'Overweight' : 'Obese'}
           </p>
         </div>
       ) : (
-        <p>Please provide valid height and weight.</p>
+        <p style={{ color:'white'}}>Please provide valid height and weight.</p>
       )}
       
-      <p>Note, BMI is not always accurate as it doesn’t account for muscle mass and fat proportions. See a doctor if you have concerns.</p>
+      <p style={{ color:'white'}}>Note, BMI is not always accurate as it doesn’t account for muscle mass and fat proportions. See a doctor if you have concerns.</p>
 
-      <h1>Your Maintance Calories</h1>
+      <h1 style={{ color:'white'}}>Your Maintance Calories</h1>
       {mc ? (
         <div>
-          <p>Your Maintance Calories Are: {mc}</p>
+          <p style={{ color:'white'}}>Your Maintance Calories Are: {mc}</p>
         </div>
       ) : (
-        <p>Please provide valid height and weight.</p>
+        <p style={{ color:'white'}}>Please provide valid height and weight.</p>
       )}
 
       {/* Back button to navigate to the previous page */}
@@ -223,7 +223,7 @@ function GoalPage({ setGoal, bmi }) {
   return (
     <div className="goal-page">
       <div className="goal-page1">
-      <h1>What are your goals?</h1>
+      <h1 style={{ color:'white'}}>What are your goals?</h1>
         <div className="form-container">
           <div className="radio-options">
             <div className="radio-option">
@@ -234,7 +234,7 @@ function GoalPage({ setGoal, bmi }) {
                 checked={localGoal === 'lose_weight'}
                 onChange={(e) => setLocalGoal(e.target.value)}
               />
-              <label>
+              <label style={{ color:'white'}}>
                 Lose Weight
                 {bmi > 25 && <span className="recommended"> *recommended</span>}
               </label>
@@ -247,7 +247,7 @@ function GoalPage({ setGoal, bmi }) {
                 checked={localGoal === 'gain_muscle'}
                 onChange={(e) => setLocalGoal(e.target.value)}
               />
-              <label>
+              <label style={{ color:'white'}}>
                 Gain Muscle
                 {bmi < 19 && <span className="recommended"> *recommended</span>}
               </label>
@@ -359,8 +359,9 @@ function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
 
   return (
     <div className="eating-page">
+      <h1 style={{ color:'white'}}>Food Journal</h1>
       <div className="form-container-eating">
-        <label>Breakfast: </label>
+        <label style={{ color:'white'}}>Breakfast: </label>
         <input
           type="text"
           value={searchTermBreakfast}
@@ -398,7 +399,7 @@ function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
           </div>
         )}
 
-        <label>Lunch: </label>
+        <label style={{ color:'white'}}>Lunch: </label>
         <input
           type="text"
           value={searchTermLunch}
@@ -436,7 +437,7 @@ function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
           </div>
         )}
 
-        <label>Dinner: </label>
+        <label style={{ color:'white'}}>Dinner: </label>
         <input
           type="text"
           value={searchTermDinner}
@@ -474,7 +475,7 @@ function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
           </div>
         )}
 
-        <label>Snack: </label>
+        <label style={{ color:'white'}}>Snack: </label>
         <input
           type="text"
           value={searchTermSnack}
@@ -615,10 +616,10 @@ function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, se
     <div className="container">
     <div className="recommendation-summary">
       <div className="summary">
-        <h2>Your Daily Nutritional Summary</h2>
-        <p>Total Calories: {totalCalories} cal</p>
-        <p>Total Sodium: {totalSodium} mg</p>
-        <p>Total Sugar: {totalSugar} g</p>
+        <h2 style={{ color:'white'}}>Your Daily Nutritional Summary</h2>
+        <p style={{ color:'white'}}>Total Calories: {totalCalories} cal</p>
+        <p style={{ color:'white'}}>Total Sodium: {totalSodium} mg</p>
+        <p style={{ color:'white'}}>Total Sugar: {totalSugar} g</p>
   
         <button className="back-button" onClick={() => navigate(-1)}>Back</button>
       </div>
@@ -626,13 +627,13 @@ function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, se
       <div className="divider"></div>
   
       <div className="recommendations">
-        <h2>Recommendations</h2>
-        <p>Breakfast: {recommendations.breakfast}</p>
-        <p>Lunch: {recommendations.lunch}</p>
-        <p>Dinner: {recommendations.dinner}</p>
-        <p>Snack: {recommendations.snack}</p>
+        <h2 style={{ color:'white'}}>Recommendations</h2>
+        <p style={{ color:'white'}}>Breakfast: {recommendations.breakfast}</p>
+        <p style={{ color:'white'}}>Lunch: {recommendations.lunch}</p>
+        <p style={{ color:'white'}}>Dinner: {recommendations.dinner}</p>
+        <p style={{ color:'white'}}>Snack: {recommendations.snack}</p>
         <Link to="/eating">
-          <button className="next-button">Go Next</button>
+          <button className="next-button">New Food Entry</button>
         </Link>
       </div>
     </div>

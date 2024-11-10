@@ -204,7 +204,7 @@ h1 {
 
 /* Recommended label styling */
 .recommended {
-  color: green;
+  color:#fd6c00;
   font-weight: bold;
   font-size: 10px;
   margin-left: 5px; /* Small space between label text and *recommended */
@@ -262,6 +262,8 @@ h1 {
   font-size: 20px;
   cursor: pointer;
 }
+
+
 
 .recommendation-summary {
   display: flex;
