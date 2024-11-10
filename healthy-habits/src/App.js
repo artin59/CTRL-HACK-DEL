@@ -57,7 +57,7 @@ function App() {
           <Route path="/bmi" element={<BMIPage height={height} weight={weight} activeness={activeness} setBmi={setBmi} setMc={setMc} />} />
           <Route path="/goals" element={<GoalPage setGoal={setGoal} bmi={bmi}/>} />
           <Route path="/eating" element={<EatingPage setBreakfast={setBreakfast} setLunch={setLunch} setDinner={setDinner} setSnack={setSnack}/>}/>
-          <Route path="/result" element={<ResultPage setCalorie={setCalorie} setSodium={setSodium} setSugar={setSugar} breakfast={breakfast} lunch={lunch} dinner={dinner} snack={snack} mc={mc}/>}/>
+          <Route path="/result" element={<ResultPage setCalorie={setCalorie} setSodium={setSodium} setSugar={setSugar} breakfast={breakfast} lunch={lunch} dinner={dinner} snack={snack} mc={mc} goal={goal}/>}/>
         </Routes>
       </div>
     </Router>
@@ -203,8 +203,8 @@ function BMIPage({ height, weight, activeness, setBmi, setMc}) {
       </div>
       
       <div className="bmi-page-image">
-      <img src={bmiOwl} alt="" /> 
-      
+      <img src={bmiOwl} alt="" className="bmiOwlImg" /> 
+      <img src={mcOwl} alt="" className="mcOwlImg"/> 
       </div>
 
     </div>
@@ -222,49 +222,57 @@ function GoalPage({ setGoal, bmi }) {
 
   return (
     <div className="goal-page">
+      <div className="goal-page1">
       <h1>What are your goals?</h1>
-
-      <div className="form-container">
-        <div className="radio-options">
-          <div className="radio-option">
-            <input
-              type="radio"
-              name="goal"
-              value="lose_weight"
-              checked={localGoal === 'lose_weight'}
-              onChange={(e) => setLocalGoal(e.target.value)}
-            />
-            <label>
-              Lose Weight
-              {bmi > 25 && <span className="recommended"> *recommended</span>}
-            </label>
-          </div>
-          <div className="radio-option">
-            <input
-              type="radio"
-              name="goal"
-              value="gain_muscle"
-              checked={localGoal === 'gain_muscle'}
-              onChange={(e) => setLocalGoal(e.target.value)}
-            />
-            <label>
-              Gain Muscle
-              {bmi < 19 && <span className="recommended"> *recommended</span>}
-            </label>
+        <div className="form-container">
+          <div className="radio-options">
+            <div className="radio-option">
+              <input
+                type="radio"
+                name="goal"
+                value="lose_weight"
+                checked={localGoal === 'lose_weight'}
+                onChange={(e) => setLocalGoal(e.target.value)}
+              />
+              <label>
+                Lose Weight
+                {bmi > 25 && <span className="recommended"> *recommended</span>}
+              </label>
+            </div>
+            <div className="radio-option">
+              <input
+                type="radio"
+                name="goal"
+                value="gain_muscle"
+                checked={localGoal === 'gain_muscle'}
+                onChange={(e) => setLocalGoal(e.target.value)}
+              />
+              <label>
+                Gain Muscle
+                {bmi < 19 && <span className="recommended"> *recommended</span>}
+              </label>
+            </div>
           </div>
         </div>
+
+        {/* Back button to navigate to the previous page */}
+        <button className="back-button" style={{ marginRight: '50px'}} onClick={() => navigate(-1)}>
+          Back
+        </button>
+
+        <Link to="/eating">
+            <button className="next-button" onClick={handleSubmit}>
+              Go Next
+            </button>
+          </Link>
       </div>
 
-     {/* Back button to navigate to the previous page */}
-     <button className="back-button" style={{ marginRight: '50px'}} onClick={() => navigate(-1)}>
-        Back
-      </button>
+      <div className="goal-page-owl">
 
-      <Link to="/eating">
-          <button className="next-button" onClick={() => navigate(1)}>
-            Go Next
-          </button>
-        </Link>
+      <img src={goalOwl} alt="" className="goalOwlImg" /> 
+
+      </div>
+      
     </div>
   );
 }
@@ -511,26 +519,33 @@ function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
           <div>Selected Snack: {localSnack ? localSnack : 'None'}</div>
         </div>
 
-<div className="buttons">
-  <button
-    className="back-button"
-    onClick={() => navigate(-1)}
-  >
-    Back
-  </button>
+        <div className="buttons">
+          <button
+            className="back-button"
+            onClick={() => navigate(-1)}
+          >
+            Back
+          </button>
 
-  <Link to="/result">
-    <button className="submit-button" onClick={handleSubmit}>
-      Submit
-    </button>
-  </Link>    
-</div>  
+          <Link to="/result">
+            <button className="submit-button" onClick={handleSubmit}>
+              Submit
+            </button>
+          </Link>    
+        </div>  
           </div>
+
+        <div className="eating-page-owl">
+
+        <img src={eatingOwl} alt="" className="eatingOwlImg" /> 
+
+        </div>
+
     </div>
   );
 }
 
-function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, setSugar, mc }) {
+function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, setSugar, mc, goal }) {
   const [totalCalories, setTotalCalories] = useState(0);
   const [totalSodium, setTotalSodium] = useState(0);
   const [totalSugar, setTotalSugar] = useState(0);
@@ -598,17 +613,18 @@ function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, se
 
   return (
     <div className="container">
+    <div className="recommendation-summary">
       <div className="summary">
         <h2>Your Daily Nutritional Summary</h2>
         <p>Total Calories: {totalCalories} cal</p>
         <p>Total Sodium: {totalSodium} mg</p>
         <p>Total Sugar: {totalSugar} g</p>
-
+  
         <button className="back-button" onClick={() => navigate(-1)}>Back</button>
       </div>
-
+  
       <div className="divider"></div>
-
+  
       <div className="recommendations">
         <h2>Recommendations</h2>
         <p>Breakfast: {recommendations.breakfast}</p>
@@ -620,6 +636,16 @@ function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, se
         </Link>
       </div>
     </div>
+  
+    <div className="result-page-owl">
+      {goal === "lose_weight" ? (
+        <img src={adviceOwl1} alt="Advice Owl for Weight Loss" className="adviceOwl1Img" />
+      ) : goal === "gain_muscle" ? (
+        <img src={adviceOwlMuscle} alt="Advice Owl for Muscle Gain" className="adviceOwlMuscleImg" />
+      ) : null}
+    </div>      
+  </div>
+  
   );
 }
 

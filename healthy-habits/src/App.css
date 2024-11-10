@@ -163,13 +163,16 @@ h1 {
 }
 
 
-.bmi-page-image img{
-
-  margin-left: -65%;
-  margin-top: -10%;
-
+.bmiOwlImg{
+  margin-left: -1000px;
+  margin-right: 500px;
+  transform: translateY(-109px);
 }
 
+.mcOwlImg{
+  transform: translateY(-109px);
+  margin-right: -1000px;
+}
 
 /* Flexbox layout for radio options */
 .radio-options {
@@ -207,6 +210,14 @@ h1 {
   margin-left: 5px; /* Small space between label text and *recommended */
 }
 
+.goalOwlImg{
+
+  margin-right: -800px;
+  margin-top: -800px;
+
+}
+
+
 .scrollable-results {
   max-height: 200px; /* Set a fixed height */
   overflow-y: auto;  /* Enable vertical scrolling */
@@ -232,6 +243,13 @@ h1 {
   color:black;
 }
 
+.eatingOwlImg{
+
+  margin-right: -850px;
+  margin-top: -600px;
+  transform: translateY(-200px);
+}
+
 
 .buttons {
   display: flex;
@@ -245,7 +263,7 @@ h1 {
   cursor: pointer;
 }
 
-.container {
+.recommendation-summary {
   display: flex;
   align-items: center;
   justify-content: center;
