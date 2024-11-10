@@ -601,6 +601,4 @@ function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, se
   );
 }
 
-
-
 export default App;
