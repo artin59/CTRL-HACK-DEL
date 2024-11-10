@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Papa from 'papaparse'; // Import papaparse to handle CSV parsing
+import { loadCSV } from './utils/csvLoader'; // Import your CSV loading utility
 import { BrowserRouter as Router, Route, Link, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
+import orangeImage from './Components/Assets/orange.png';
 
 function App() {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [activeness, setActiveness] = useState('');
   const [goal, setGoal] = useState('');
+  const [bmi, setBmi] = useState(''); // Add state for BMI
+  const [mc, setMc] = useState('');
+  const [breakfast, setBreakfast] = useState('');
+  const [lunch, setLunch] = useState('');
+  const [dinner, setDinner] = useState('');
+  const [snack, setSnack] = useState('');
+  const [calorie, setCalorie] = useState('');
+  const [sodium, setSodium] = useState('');
+  const [sugar, setSugar] = useState('');
+  
   const [isClicked, setIsClicked] = useState(false); // Track if "Start" button has been clicked
 
   return (
@@ -16,6 +29,8 @@ function App() {
           {/* Make the title into a button and navigate to the start page */}
           <button className="title-button" onClick={() => window.location.href = '/'}>
             Healthy Habits
+            <img src={orangeImage} alt="Orange" /> 
+
           </button>
           <button className="auth-button">Login/Signup</button>
         </header>
@@ -32,8 +47,10 @@ function App() {
 
         <Routes>
           <Route path="/start" element={<StartPage setHeight={setHeight} setWeight={setWeight} setActiveness={setActiveness} />} />
-          <Route path="/bmi" element={<BMIPage height={height} weight={weight} activeness={activeness}/>} />
-          <Route path="/goals" element={<GoalPage setGoal={setGoal}/>} />
+          <Route path="/bmi" element={<BMIPage height={height} weight={weight} activeness={activeness} setBmi={setBmi} setMc={setMc} />} />
+          <Route path="/goals" element={<GoalPage setGoal={setGoal} bmi={bmi}/>} />
+          <Route path="/eating" element={<EatingPage setBreakfast={setBreakfast} setLunch={setLunch} setDinner={setDinner} setSnack={setSnack}/>}/>
+          <Route path="/result" element={<ResultPage setCalorie={setCalorie} setSodium={setSodium} setSugar={setSugar} breakfast={breakfast} lunch={lunch} dinner={dinner} snack={snack} mc={mc}/>}/>
         </Routes>
       </div>
     </Router>
@@ -54,7 +71,7 @@ function StartPage({ setHeight, setWeight, setActiveness }) {
 
   return (
     <div className="start-page">
-      <h1>Start Your Journey</h1>
+      <h1> Welcome to Healthy Habits</h1>
       <div className="form-container">
         <label>Height (cm): </label>
         <input
@@ -93,7 +110,7 @@ function StartPage({ setHeight, setWeight, setActiveness }) {
   );
 }
 
-function BMIPage({ height, weight, activeness}) {
+function BMIPage({ height, weight, activeness, setBmi, setMc}) {
   const navigate = useNavigate(); // Hook to navigate to previous page
 
   const calculateBMI = (height, weight) => {
@@ -129,8 +146,9 @@ function BMIPage({ height, weight, activeness}) {
   };
   
   const bmi = calculateBMI(height, weight);
+  setBmi(bmi);
   const mc = calculateMC(height, weight, activeness);
-
+  setMc(mc);
   return (
     <div className="bmi-page">
       <h1>Your BMI</h1>
@@ -172,9 +190,9 @@ function BMIPage({ height, weight, activeness}) {
   );
 }
 
-function GoalPage({ setGoal }) {
+function GoalPage({ setGoal, bmi }) {
   const [localGoal, setLocalGoal] = useState('lose_weight');
-  const navigate = useNavigate(); // Hook to navigate to previous page
+  const navigate = useNavigate(); 
 
   const handleSubmit = () => {
     setGoal(localGoal);
@@ -183,22 +201,384 @@ function GoalPage({ setGoal }) {
   return (
     <div className="goal-page">
       <h1>What are your goals?</h1>
+
       <div className="form-container">
-        <label>Goals: </label>
-        <select
-          value={localGoal}
-          onChange={(e) => setLocalGoal(e.target.value)}
-        >
-          <option value="lose_weight">Lose Weight</option>
-          <option value="gain_muscle">Gain muscle</option>
-        </select>
+        <div className="radio-options">
+          <div className="radio-option">
+            <input
+              type="radio"
+              name="goal"
+              value="lose_weight"
+              checked={localGoal === 'lose_weight'}
+              onChange={(e) => setLocalGoal(e.target.value)}
+            />
+            <label>
+              Lose Weight
+              {bmi > 25 && <span className="recommended"> *recommended</span>}
+            </label>
+          </div>
+          <div className="radio-option">
+            <input
+              type="radio"
+              name="goal"
+              value="gain_muscle"
+              checked={localGoal === 'gain_muscle'}
+              onChange={(e) => setLocalGoal(e.target.value)}
+            />
+            <label>
+              Gain Muscle
+              {bmi < 19 && <span className="recommended"> *recommended</span>}
+            </label>
+          </div>
+        </div>
       </div>
-      <button className="back-button" onClick={() => navigate(-1)}>
+
+     {/* Back button to navigate to the previous page */}
+     <button className="back-button" style={{ marginRight: '50px'}} onClick={() => navigate(-1)}>
         Back
       </button>
 
+      <Link to="/eating">
+          <button className="next-button" onClick={() => navigate(1)}>
+            Go Next
+          </button>
+        </Link>
     </div>
   );
 }
+
+function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
+  const [localBreakfast, setLocalBreakfast] = useState('');
+  const [localLunch, setLocalLunch] = useState('');
+  const [localDinner, setLocalDinner] = useState('');
+  const [localSnack, setLocalSnack] = useState('');
+  const [searchTermBreakfast, setSearchTermBreakfast] = useState('');
+  const [searchTermLunch, setSearchTermLunch] = useState('');
+  const [searchTermDinner, setSearchTermDinner] = useState('');
+  const [searchTermSnack, setSearchTermSnack] = useState('');
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [allFoods, setAllFoods] = useState([]);
+  const [selectedItemBreakfast, setSelectedItemBreakfast] = useState(null);  // Track selected item for Breakfast
+  const [selectedItemLunch, setSelectedItemLunch] = useState(null);  // Track selected item for Lunch
+  const [selectedItemDinner, setSelectedItemDinner] = useState(null);  // Track selected item for Dinner
+  const [selectedItemSnack, setSelectedItemSnack] = useState(null);  // Track selected item for Snack
+  const [hoveredItem, setHoveredItem] = useState(null);  // Track hovered item
+  const [showResultsBreakfast, setShowResultsBreakfast] = useState(true); // Track visibility of results
+  const [showResultsLunch, setShowResultsLunch] = useState(true);
+  const [showResultsDinner, setShowResultsDinner] = useState(true);
+  const [showResultsSnack, setShowResultsSnack] = useState(true);
+  const navigate = useNavigate();
+
+  // Load and parse the CSV data
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await loadCSV();
+      setAllFoods(data);
+    };
+
+    fetchData();
+  }, []);
+
+  // Filter the results based on the search term for each category
+  const filterResults = (searchTerm) => {
+    if (searchTerm === '') {
+      return [];
+    } else {
+      return allFoods.filter(food =>
+        food.food_name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+  };
+
+  // Handle the input change for each category
+  const handleInputChange = (e, category) => {
+    if (category === 'Breakfast') setSearchTermBreakfast(e.target.value);
+    if (category === 'Lunch') setSearchTermLunch(e.target.value);
+    if (category === 'Dinner') setSearchTermDinner(e.target.value);
+    if (category === 'Snack') setSearchTermSnack(e.target.value);
+  };
+
+  // Handle the click on a food item and set it to the respective category state
+  const handleFoodClick = (foodName, category) => {
+    if (category === 'Breakfast') {
+      setLocalBreakfast(foodName);
+      setSelectedItemBreakfast(foodName);
+      setShowResultsBreakfast(false); // Hide results after selection
+    } else if (category === 'Lunch') {
+      setLocalLunch(foodName);
+      setSelectedItemLunch(foodName);
+      setShowResultsLunch(false); // Hide results after selection
+    } else if (category === 'Dinner') {
+      setLocalDinner(foodName);
+      setSelectedItemDinner(foodName);
+      setShowResultsDinner(false); // Hide results after selection
+    } else if (category === 'Snack') {
+      setLocalSnack(foodName);
+      setSelectedItemSnack(foodName);
+      setShowResultsSnack(false); // Hide results after selection
+    }
+  };
+
+  // Handle form submission
+  const handleSubmit = () => {
+    setBreakfast(localBreakfast);
+    setLunch(localLunch);
+    setDinner(localDinner);
+    setSnack(localSnack);
+  };
+
+  return (
+    <div className="eating-page">
+      <div className="form-container">
+        <label>Breakfast: </label>
+        <input
+          type="text"
+          value={searchTermBreakfast}
+          onChange={(e) => handleInputChange(e, 'Breakfast')}
+          placeholder="Search for Breakfast..."
+        />
+        {showResultsBreakfast && (
+          <div className="scrollable-results">
+            <ul>
+              {filterResults(searchTermBreakfast).map((food, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleFoodClick(food.food_name, 'Breakfast')}
+                  onMouseEnter={() => setHoveredItem(food.food_name)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '5px',
+                    backgroundColor:
+                      selectedItemBreakfast === food.food_name
+                        ? '#19634c'
+                        : hoveredItem === food.food_name
+                        ? '#e9f6f4'
+                        : '#8ab3a8',
+                    color:
+                      selectedItemBreakfast === food.food_name || hoveredItem === food.food_name
+                        ? 'black'
+                        : 'black',
+                  }}
+                >
+                  {food.food_name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <label>Lunch: </label>
+        <input
+          type="text"
+          value={searchTermLunch}
+          onChange={(e) => handleInputChange(e, 'Lunch')}
+          placeholder="Search for Lunch..."
+        />
+        {showResultsLunch && (
+          <div className="scrollable-results">
+            <ul>
+              {filterResults(searchTermLunch).map((food, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleFoodClick(food.food_name, 'Lunch')}
+                  onMouseEnter={() => setHoveredItem(food.food_name)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '5px',
+                    backgroundColor:
+                      selectedItemLunch === food.food_name
+                        ? '#19634c'
+                        : hoveredItem === food.food_name
+                        ? '#e9f6f4'
+                        : '#8ab3a8',
+                    color:
+                      selectedItemLunch === food.food_name || hoveredItem === food.food_name
+                        ? 'black'
+                        : 'black',
+                  }}
+                >
+                  {food.food_name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <label>Dinner: </label>
+        <input
+          type="text"
+          value={searchTermDinner}
+          onChange={(e) => handleInputChange(e, 'Dinner')}
+          placeholder="Search for Dinner..."
+        />
+        {showResultsDinner && (
+          <div className="scrollable-results">
+            <ul>
+              {filterResults(searchTermDinner).map((food, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleFoodClick(food.food_name, 'Dinner')}
+                  onMouseEnter={() => setHoveredItem(food.food_name)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '5px',
+                    backgroundColor:
+                      selectedItemDinner === food.food_name
+                        ? '#19634c'
+                        : hoveredItem === food.food_name
+                        ? '#e9f6f4'
+                        : '#8ab3a8',
+                    color:
+                      selectedItemDinner === food.food_name || hoveredItem === food.food_name
+                        ? 'black'
+                        : 'black',
+                  }}
+                >
+                  {food.food_name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <label>Snack: </label>
+        <input
+          type="text"
+          value={searchTermSnack}
+          onChange={(e) => handleInputChange(e, 'Snack')}
+          placeholder="Search for Snack..."
+        />
+        {showResultsSnack && (
+          <div className="scrollable-results">
+            <ul>
+              {filterResults(searchTermSnack).map((food, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleFoodClick(food.food_name, 'Snack')}
+                  onMouseEnter={() => setHoveredItem(food.food_name)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '5px',
+                    backgroundColor:
+                      selectedItemSnack === food.food_name
+                        ? '#19634c'
+                        : hoveredItem === food.food_name
+                        ? '#e9f6f4'
+                        : '#8ab3a8',
+                    color:
+                      selectedItemSnack === food.food_name || hoveredItem === food.food_name
+                        ? 'black'
+                        : 'black',
+                  }}
+                >
+                  {food.food_name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div>
+          <div>Selected Breakfast: {localBreakfast ? localBreakfast : 'None'}</div>
+          <div>Selected Lunch: {localLunch ? localLunch : 'None'}</div>
+          <div>Selected Dinner: {localDinner ? localDinner : 'None'}</div>
+          <div>Selected Snack: {localSnack ? localSnack : 'None'}</div>
+        </div>
+
+<div className="buttons">
+  <button
+    className="back-button"
+    onClick={() => navigate(-1)}
+  >
+    Back
+  </button>
+
+  <Link to="/result">
+    <button className="submit-button" onClick={handleSubmit}>
+      Submit
+    </button>
+  </Link>    
+</div>  
+          </div>
+    </div>
+  );
+}
+
+function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, setSugar, mc}) {
+  const [totalCalories, setTotalCalories] = useState(0);
+  const [totalSodium, setTotalSodium] = useState(0);
+  const [totalSugar, setTotalSugar] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const calculateTotals = async () => {
+      const data = await loadCSV();
+      
+      const selectedFoods = [breakfast, lunch, dinner, snack];
+      
+      let calorieSum = 0;
+      let sodiumSum = 0;
+      let sugarSum = 0;
+
+      // Filter through CSV data for the selected items and accumulate values
+      data.forEach((food) => {
+        if (selectedFoods.includes(food.food_name)) {
+          calorieSum += parseInt(food.Calories, 10);
+          sodiumSum += parseInt(food.Sodium, 10);
+          sugarSum += parseInt(food.Sugars, 10);
+        }
+      });
+
+      // Update state and passed-down props
+      setTotalCalories(calorieSum);
+      setTotalSodium(sodiumSum);
+      setTotalSugar(sugarSum);
+      setCalorie(calorieSum);
+      setSodium(sodiumSum);
+      setSugar(sugarSum);
+    };
+
+    calculateTotals();
+  }, [breakfast, lunch, dinner, snack, setCalorie, setSodium, setSugar]);
+
+  return (
+<div className="container">
+  <div className="summary">
+    <h2>Your Daily Nutritional Summary</h2>
+    <p>Total Calories: {totalCalories} cal</p>
+    <p>Total Sodium: {totalSodium} mg</p>
+    <p>Total Sugar: {totalSugar} g</p>
+
+    <button className="back-button" onClick={() => navigate(-1)}>
+      Back
+    </button>
+
+
+  </div>
+
+  <div className="divider"></div>
+
+  <div className="recommendations">
+    <h2>Recommendations</h2>
+    <p>Placeholder text for recommendations goes here.</p>
+    <Link to="/eating">
+      <button className="next-button" onClick={() => navigate(1)}>
+        Go Next
+      </button>
+    </Link>
+  </div>
+</div>
+
+
+
+
+  );
+}
+
+
 
 export default App;

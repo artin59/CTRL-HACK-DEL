@@ -23,6 +23,7 @@ header {
   align-items: center;
 }
 
+
 h1 {
   font-size: 36px;
 }
@@ -83,13 +84,13 @@ h1 {
 }
 
 .submit-button {
-  padding: 10px 20px;
+  margin-top: 50px;
+  padding: 15px 50px;
   background-color: #19634c;
   color: #ffffff;
   border: none;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
 }
 
 .submit-button:hover {
@@ -138,4 +139,98 @@ h1 {
 
 .next-button:hover {
   background-color: #174235;
+}
+
+/* Flexbox layout for radio options */
+.radio-options {
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack radio buttons vertically */
+  margin-top: 20px;
+  margin-right: 50px;
+  align-items: flex-start; /* Align radio buttons and labels to the left */
+  margin-left: 20px;
+}
+
+/* Each radio option (input + label) */
+.radio-option {
+  display: flex; /* Flexbox to align radio button and label horizontally */
+  align-items: center; /* Vertically center the radio button and label */
+  white-space: nowrap; /* Prevent label text from breaking onto a new line */
+  margin-top: 10px;
+}
+
+/* Space between radio button and label */
+.radio-option input {
+  margin-right: 10px;
+}
+
+/* Label styling */
+.radio-option label {
+  font-size: 17px;
+}
+
+/* Recommended label styling */
+.recommended {
+  color: green;
+  font-weight: bold;
+  font-size: 10px;
+  margin-left: 5px; /* Small space between label text and *recommended */
+}
+
+.scrollable-results {
+  max-height: 200px; /* Set a fixed height */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  margin-top: 10px;  /* Add some space between the input and the scroll box */
+}
+
+.scrollable-results ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.scrollable-results li {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Optional: Hover effect */
+.scrollable-results li:hover {
+  background-color: #e9f6f4; /* Highlight the item when hovered */
+  cursor: pointer;
+  color:black;
+}
+
+
+.buttons {
+  display: flex;
+  justify-content: center; /* Center-aligns the buttons */
+  gap: 20px; /* Adds space between the buttons */
+  margin-top: 20px; /* Optional: Adds space above the button container */
+}
+
+.back-button, .submit-button {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Space between columns */
+  padding: 20px;
+}
+
+.summary{
+  width: 40%; /* Each column takes up 40% of the width */
+  text-align: center; /* Center-align content inside each column */
+  border-right: 1px solid black;
+}
+
+
+.recommendations {
+  width: 40%; /* Each column takes up 40% of the width */
+  text-align: center; /* Center-align content inside each column */
 }
