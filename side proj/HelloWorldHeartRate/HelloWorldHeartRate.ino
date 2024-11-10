@@ -15,12 +15,12 @@ int beatAvg;
 int beatAvgOld;
 bool finger;
 int count = 0;
-const int button1 = 7;
+const int button = 7;
 char letter;
 unsigned long previousMillis = 0;  
 const long interval = 1000; 
-char hello[11];
-
+char hello[19] = {'_', ' ', '_', ' ', '_', ' ', '_', ' ', '_', ' ', '_',' ', '_',' ', '_',' ', '_',' ', '_'};
+int check;
 void setup()
 {
   Serial.begin(115200);
@@ -41,17 +41,7 @@ void setup()
   pinMode(button, INPUT);
   digitalWrite(button, HIGH);
 
-    hello[0]="_ ";
-    hello[1]="_ ";
-    hello[2]="_ ";
-    hello[3]="_ ";
-    hello[4]="_ ";
-    hello[5]=" ";
-    hello[6]="_ ";
-    hello[7]="_ ";
-    hello[8]="_ ";
-    hello[9]="_ ";
-    hello[10]="_";
+  // Initialize 'hello' array with single characters (not strings)
 
 }
 
@@ -91,48 +81,42 @@ void loop(){
       }
     }
 
-    //Serial.print("IR=");
-    //Serial.print(irValue);
-    //Serial.print(", BPM=");
-    //Serial.print(beatsPerMinute);
-    //Serial.print(", Avg BPM=");
-
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;  // Update the last print time
     Serial.println(beatAvg);
 
-    for (int j=0; j<11;j++){
+    for (int j=0; j<19;j++){
       Serial.print(hello[j]);
     }
     Serial.println("");
-  }
 
+  }
 
     if (!digitalRead(button)){
       letter = (char)beatAvg;
       Serial.println(letter);
 
-      if (letter=="H")
-        hello[0]="H";
-      else if(letter=="E")
-        hello[1]="e";
-      else if(letter=="L"){
-        hello[2]="l";      
-        hello[3]="l";
-        hello[9]="l";
+      // Check letter and update 'hello' array with correct character
+      if (letter == 'H')
+        hello[0] = 'H';
+      else if(letter == 'E')
+        hello[2] = 'e';
+      else if(letter == 'L'){
+        hello[4] = 'l';      
+        hello[6] = 'l';
+        hello[16] = 'l';
       }
-      else if(letter=="O"){
-        hello[4]="o";
-        hello[7]="o";
+      else if(letter == 'O'){
+        hello[8] = 'o';
+        hello[12] = 'o';
       }
-      else if(letter=="W")
-        hello[6]="W";
-      else if(letter=="R")
-        hello[8]="r";
-      else if(letter=="D")
-        hello[10]="d";        
+      else if(letter == 'W')
+        hello[10] = 'W';
+      else if(letter == 'R')
+        hello[14] = 'r';
+      else if(letter == 'D')        
+        hello[18] = 'd';        
     }
-
 
   if (beatAvg != beatAvgOld && beatAvg >= 60){
     count = 0;
@@ -140,8 +124,5 @@ void loop(){
 
   beatAvgOld = beatAvg;
 
-
   }
 }
-
-
