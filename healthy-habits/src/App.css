@@ -1,0 +1,141 @@
+/* Apply Comfortaa font */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+body {
+  font-family: 'Comfortaa', cursive;
+  margin: 0;
+  padding: 0;
+  background-color: #e9f6f4;
+  color: #19634c;
+}
+
+/* Main page styles */
+.App {
+  text-align: center;
+}
+
+header {
+  background-color: #19634c;
+  color: #ffffff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+.title-button {
+  background-color: #19634c; /* Green color */
+  color: #fff; /* White text */
+  font-size: 2rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 9px;
+}
+
+
+
+
+.auth-button {
+  padding: 10px 20px;
+  background-color: #174235;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.auth-button:hover {
+  background-color: #19634c;
+}
+
+/* Start page styles */
+.start-page {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.start-page h1 {
+  font-size: 36px;
+}
+
+.form-container {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+}
+
+.form-container input,
+.form-container select {
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #174235;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #19634c;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #174235;
+}
+
+/* Start button styles */
+.start-button {
+  margin-top: 100px;
+  padding: 15px 50px;
+  background-color: #19634c;
+  color: #ffffff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #174235;
+}
+
+.back-button{
+  margin-top: 50px;
+  padding: 15px 50px;
+  background-color: #19634c;
+  color: #ffffff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+.back-button:hover {
+  background-color: #174235;
+}
+
+.next-button{
+  margin-top: 50px;
+  padding: 15px 50px;
+  background-color: #19634c;
+  color: #ffffff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.next-button:hover {
+  background-color: #174235;
+}
