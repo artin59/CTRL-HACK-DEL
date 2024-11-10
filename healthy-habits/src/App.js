@@ -4,6 +4,13 @@ import { loadCSV } from './utils/csvLoader'; // Import your CSV loading utility
 import { BrowserRouter as Router, Route, Link, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import orangeImage from './Components/Assets/orange.png';
+import owl1 from './Components/Assets/owl1.png';
+import bmiOwl from './Components/Assets/bmiOwl.png';
+import mcOwl from './Components/Assets/mcOwl.png';
+import goalOwl from './Components/Assets/goalOwl.png';
+import eatingOwl from './Components/Assets/eatingOwl.png';
+import adviceOwl1 from './Components/Assets/adviceOwl1.png';
+import adviceOwlMuscle from './Components/Assets/adviceOwlMuscle.png';
 
 function App() {
   const [height, setHeight] = useState('');
@@ -73,6 +80,10 @@ function StartPage({ setHeight, setWeight, setActiveness }) {
     <div className="start-page">
       <h1> Welcome to Healthy Habits</h1>
       <div className="form-container">
+        <div className="owl1">      
+          <img src={owl1} alt="" /> 
+        </div>
+        <div className="forms">
         <label>Height (cm): </label>
         <input
           type="number"
@@ -100,12 +111,15 @@ function StartPage({ setHeight, setWeight, setActiveness }) {
           <option value="very_active">Very Active</option>
         </select>
 
-        <Link to="/bmi">
+        </div>
+
+      </div>
+      <div className="start-page-submit-button">        <Link to="/bmi">
           <button className="submit-button" onClick={handleSubmit}>
             Submit
           </button>
         </Link>
-      </div>
+        </div>
     </div>
   );
 }
@@ -151,6 +165,7 @@ function BMIPage({ height, weight, activeness, setBmi, setMc}) {
   setMc(mc);
   return (
     <div className="bmi-page">
+      <div className="bmi-page1">
       <h1>Your BMI</h1>
       {bmi ? (
         <div>
@@ -185,8 +200,15 @@ function BMIPage({ height, weight, activeness, setBmi, setMc}) {
             Go Next
           </button>
         </Link>
+      </div>
       
+      <div className="bmi-page-image">
+      <img src={bmiOwl} alt="" /> 
+      
+      </div>
+
     </div>
+
   );
 }
 
@@ -329,7 +351,7 @@ function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
 
   return (
     <div className="eating-page">
-      <div className="form-container">
+      <div className="form-container-eating">
         <label>Breakfast: </label>
         <input
           type="text"
