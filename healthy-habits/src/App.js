@@ -508,73 +508,96 @@ function EatingPage({ setBreakfast, setLunch, setDinner, setSnack }) {
   );
 }
 
-function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, setSugar, mc}) {
+function ResultPage({ breakfast, lunch, dinner, snack, setCalorie, setSodium, setSugar, mc }) {
   const [totalCalories, setTotalCalories] = useState(0);
   const [totalSodium, setTotalSodium] = useState(0);
   const [totalSugar, setTotalSugar] = useState(0);
+  const [recommendations, setRecommendations] = useState({ breakfast: '', lunch: '', dinner: '', snack: '' });
   const navigate = useNavigate();
 
   useEffect(() => {
-    const calculateTotals = async () => {
+    const calculateTotalsAndRecommendations = async () => {
       const data = await loadCSV();
-      
-      const selectedFoods = [breakfast, lunch, dinner, snack];
-      
-      let calorieSum = 0;
-      let sodiumSum = 0;
-      let sugarSum = 0;
 
-      // Filter through CSV data for the selected items and accumulate values
-      data.forEach((food) => {
-        if (selectedFoods.includes(food.food_name)) {
-          calorieSum += parseInt(food.Calories, 10);
-          sodiumSum += parseInt(food.Sodium, 10);
-          sugarSum += parseInt(food.Sugars, 10);
+      const selectedFoods = { breakfast, lunch, dinner, snack };
+      let calorieSum = 0, sodiumSum = 0, sugarSum = 0;
+      let newRecommendations = {};
+
+      Object.keys(selectedFoods).forEach(meal => {
+        const selectedFood = selectedFoods[meal];
+        const foodData = data.find(food => food.food_name === selectedFood);
+
+        if (foodData) {
+          calorieSum += parseInt(foodData.Calories, 10);
+          sodiumSum += parseInt(foodData.Sodium, 10);
+          sugarSum += parseInt(foodData.Sugars, 10);
+
+          const mealRecommendation = recommendLowSodiumOption(data, selectedFood, foodData.Category, parseInt(foodData.Sodium, 10));
+          newRecommendations[meal] = mealRecommendation;
+        } else {
+          newRecommendations[meal] = `No data available for ${selectedFood}`;
         }
       });
 
-      // Update state and passed-down props
       setTotalCalories(calorieSum);
       setTotalSodium(sodiumSum);
       setTotalSugar(sugarSum);
+      setRecommendations(newRecommendations);
       setCalorie(calorieSum);
       setSodium(sodiumSum);
       setSugar(sugarSum);
     };
 
-    calculateTotals();
+    calculateTotalsAndRecommendations();
   }, [breakfast, lunch, dinner, snack, setCalorie, setSodium, setSugar]);
 
+  const recommendLowSodiumOption = (data, itemName, category, itemSodium) => {
+    // Filter by category, excluding the selected item, and parse sodium values
+    const categoryItems = data.filter(food => food.Category === category && food.food_name !== itemName);
+    const sortedBySodium = categoryItems
+      .map(food => ({
+        ...food,
+        Sodium: parseInt(food.Sodium, 10),
+      }))
+      .filter(food => !isNaN(food.Sodium)) // Ensure valid sodium data
+      .sort((a, b) => a.Sodium - b.Sodium);
+
+    // Debugging output for category checks
+    console.log(`Category: ${category}`, sortedBySodium);
+
+    // Check if sorted items exist and if selected item has the lowest sodium
+    if (sortedBySodium.length === 0 || itemSodium <= sortedBySodium[0].Sodium) {
+      return "You've chosen the best option for low sodium!";
+    }
+
+    // Recommend the lowest sodium item
+    return `Consider ${sortedBySodium[0].food_name} with ${sortedBySodium[0].Sodium}mg of sodium.`;
+  };
+
   return (
-<div className="container">
-  <div className="summary">
-    <h2>Your Daily Nutritional Summary</h2>
-    <p>Total Calories: {totalCalories} cal</p>
-    <p>Total Sodium: {totalSodium} mg</p>
-    <p>Total Sugar: {totalSugar} g</p>
+    <div className="container">
+      <div className="summary">
+        <h2>Your Daily Nutritional Summary</h2>
+        <p>Total Calories: {totalCalories} cal</p>
+        <p>Total Sodium: {totalSodium} mg</p>
+        <p>Total Sugar: {totalSugar} g</p>
 
-    <button className="back-button" onClick={() => navigate(-1)}>
-      Back
-    </button>
+        <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+      </div>
 
-  </div>
+      <div className="divider"></div>
 
-  <div className="divider"></div>
-
-  <div className="recommendations">
-    <h2>Recommendations</h2>
-    <p>Placeholder text for recommendations goes here.</p>
-    <Link to="/eating">
-          <button className="next-button" onClick={() => navigate(1)}>
-            Go Next
-          </button>
+      <div className="recommendations">
+        <h2>Recommendations</h2>
+        <p>Breakfast: {recommendations.breakfast}</p>
+        <p>Lunch: {recommendations.lunch}</p>
+        <p>Dinner: {recommendations.dinner}</p>
+        <p>Snack: {recommendations.snack}</p>
+        <Link to="/eating">
+          <button className="next-button">Go Next</button>
         </Link>
-  </div>
-</div>
-
-
-
-
+      </div>
+    </div>
   );
 }
 

@@ -1,61 +1,61 @@
-food_name,Calories,Total Fat,Sodium,Carbs,Sugars,Protein,Category
-Bacon Clubhouse Burger,740,41,1480,51,14,40,Burgers
-Big Mac,540,28,970,47,9,25,Burgers
-Quarter Pounder with Cheese,540,28,1110,42,10,31,Burgers
-Double Quarter Pounder with Cheese,780,45,1310,43,10,50,Burgers
-Hamburger,250,8,490,32,6,12,Burgers
-Cheeseburger,300,12,680,33,7,15,Burgers
-Double Cheeseburger,440,22,1050,35,7,25,Burgers
-McDouble,390,18,850,34,7,22,Burgers
-Bacon McDouble,460,23,1120,34,7,28,Burgers
-Bacon Clubhouse Buttermilk Crispy Sandwich,790,40,1620,67,15,40,Sandwiches
-McChicken,370,17,650,40,5,14,Sandwiches
-Buffalo Ranch McChicken,370,17,850,41,5,14,Sandwiches
-Bacon Cheddar McChicken,490,25,1120,41,6,20,Sandwiches
-Southern Style Crispy Chicken,470,21,1120,43,6,22,Sandwiches
-Filet-O-Fish,390,19,590,41,5,15,Sandwiches
-McRib,500,26,980,44,11,22,Sandwiches
-McWrap Chicken & Bacon (Buttermilk Crispy),690,34,1450,58,6,36,Wraps
-McWrap Grilled Chicken & Grilled,500,180,19,30,8,38,Wraps
-McWrap Sweet Chili (Buttermilk Crispy),590,25,1160,64,12,27,Wraps
-McWrap Sweet Chili (Grilled),400,10,1250,46,11,31,Wraps
-Chicken Nuggets (10 Piece),470,30,900,30,0,22,Side
-Chicken Nuggets (20 Piece),940,60,1800,60,0,44,Side
-Chicken Nuggets (40 Piece),1880,120,3600,120,0,88,Side
-Fruit Yogurt Parfait,150,2,80,30,23,4,Side
-French Fries (Small),230,11,130,30,0,2,Side
-French Fries (Medium),340,16,260,44,0,4,Side
-French Fries (Large),803,41,777,98,1,12,Side
-Apple Slices,15,0,0,4,3,0,Side
-Ranch Side Wrap (Buttermilk Crispy),380,21,760,33,2,16,Side
-Ranch Side Wrap (Grilled),290,13,820,25,2,19,Side
-Sausage McMuffin with Egg,450,28,860,30,2,21,morning
-Hotcakes and Sausage,520,24,930,61,14,15,morning
-Egg McMuffin,300,13,750,31,3,17,morning
-Bacon Egg & Cheese McGriddles,460,21,1250,48,15,19,morning
-Sausage McGriddles,420,22,1030,44,15,11,morning
-Big morning,740,48,1560,51,3,28,morning
-Hotcakes,350,9,590,60,14,8,morning
-Egg White Delight,250,8,770,30,3,18,morning
-Hash Browns,150,9,310,15,0,1,morning
-Fruit & Maple Oatmeal,290,4,160,58,32,5,morning
-Fruit & Maple Oatmeal (Without Brown Sugar),260,4,115,49,18,5,morning
-McCafe Caramel Mocha,320,11,170,45,40,10,Beverage
-Blueberry Pomegranate Smoothie,220,1,40,50,44,2,Beverage
-Minute Maid Apple Juice Box,80,0,15,21,19,0,Beverage
-Iced Coffee With Sugar Free Vanilla Syrup,80,5,65,9,1,1,Beverage
-Iced Coffee with French Vanilla,120,5,40,20,19,1,Beverage
-Coca Cola Classic,140,0,0,39,39,0,Beverage
-Sprite,140,0,30,37,39,0,Beverage
-Baked Hot Apple Pie,250,13,170,32,13,2,Dessert
-Chocolate Chip Cookie,160,8,90,21,15,2,Dessert
-Oatmeal Raisin Cookie,150,6,135,22,13,2,Dessert
-Hot Fudge Sundae,330,9,170,53,48,8,Dessert
-Strawberry Sundae,280,6,85,49,45,6,Dessert
-McFlurry with OREO Cookies,340,11,170,53,43,8,Dessert
-Hot Habanero,80,7,180,5,2,1,Sauce
-Creamy Ranch Sauce,110,12,170,1,1,0,Sauce
-Sweet & Sour Sauce,50,0,150,12,10,0,Sauce
-Hotcake Syrup,180,0,20,45,21,0,Sauce
-Honey Mustard Sauce,60,4,115,6,5,0,Sauce
-Barbeque Sauce (BBQ),50,0,260,12,10,0,Sauce
+food_name,Calories,Total Fat,Sodium,Carbs,Sugars,Protein,Category,
+Bacon Clubhouse Burger,740,41,1480,51,14,40,Burgers,
+Big Mac,540,28,970,47,9,25,Burgers,
+Quarter Pounder with Cheese,540,28,1110,42,10,31,Burgers,
+Double Quarter Pounder with Cheese,780,45,1310,43,10,50,Burgers,
+Hamburger,250,8,490,32,6,12,Burgers,
+Cheeseburger,300,12,680,33,7,15,Burgers,
+Double Cheeseburger,440,22,1050,35,7,25,Burgers,
+McDouble,390,18,850,34,7,22,Burgers,brek
+Bacon McDouble,460,23,1120,34,7,28,Burgers,
+Bacon Clubhouse Buttermilk Crispy Sandwich,790,40,1620,67,15,40,Sandwiches,
+McChicken,370,17,650,40,5,14,Sandwiches,lun
+Buffalo Ranch McChicken,370,17,850,41,5,14,Sandwiches,
+Bacon Cheddar McChicken,490,25,1120,41,6,20,Sandwiches,
+Southern Style Crispy Chicken,470,21,1120,43,6,22,Sandwiches,
+Filet-O-Fish,390,19,590,41,5,15,Sandwiches,
+McRib,500,26,980,44,11,22,Sandwiches,
+McWrap Chicken & Bacon (Buttermilk Crispy),690,34,1450,58,6,36,Wraps,din
+McWrap Grilled Chicken & Grilled,500,180,1500,30,8,38,Wraps,
+McWrap Sweet Chili (Buttermilk Crispy),590,25,1160,64,12,27,Wraps,
+McWrap Sweet Chili (Grilled),400,10,1250,46,11,31,Wraps,
+Chicken Nuggets (10 Piece),470,30,900,30,0,22,Side,
+Chicken Nuggets (20 Piece),940,60,1800,60,0,44,Side,
+Chicken Nuggets (40 Piece),1880,120,3600,120,0,88,Side,
+Fruit Yogurt Parfait,150,2,80,30,23,4,Side,
+French Fries (Small),230,11,130,30,0,2,Side,
+French Fries (Medium),340,16,260,44,0,4,Side,
+French Fries (Large),803,41,777,98,1,12,Side,
+Apple Slices,15,0,0,4,3,0,Side,
+Ranch Side Wrap (Buttermilk Crispy),380,21,760,33,2,16,Side,
+Ranch Side Wrap (Grilled),290,13,820,25,2,19,Side,
+Sausage McMuffin with Egg,450,28,860,30,2,21,morning,
+Hotcakes and Sausage,520,24,930,61,14,15,morning,
+Egg McMuffin,300,13,750,31,3,17,morning,
+Bacon Egg & Cheese McGriddles,460,21,1250,48,15,19,morning,
+Sausage McGriddles,420,22,1030,44,15,11,morning,
+Big morning,740,48,1560,51,3,28,morning,
+Hotcakes,350,9,590,60,14,8,morning,
+Egg White Delight,250,8,770,30,3,18,morning,
+Hash Browns,150,9,310,15,0,1,morning,
+Fruit & Maple Oatmeal,290,4,160,58,32,5,morning,
+Fruit & Maple Oatmeal (Without Brown Sugar),260,4,115,49,18,5,morning,
+McCafe Caramel Mocha,320,11,170,45,40,10,Beverage,
+Blueberry Pomegranate Smoothie,220,1,40,50,44,2,Beverage,
+Minute Maid Apple Juice Box,80,0,15,21,19,0,Beverage,
+Iced Coffee With Sugar Free Vanilla Syrup,80,5,65,9,1,1,Beverage,
+Iced Coffee with French Vanilla,120,5,40,20,19,1,Beverage,
+Coca Cola Classic,140,0,0,39,39,0,Beverage,
+Sprite,140,0,30,37,39,0,Beverage,
+Baked Hot Apple Pie,250,13,170,32,13,2,Dessert,
+Chocolate Chip Cookie,160,8,90,21,15,2,Dessert,
+Oatmeal Raisin Cookie,150,6,135,22,13,2,Dessert,
+Hot Fudge Sundae,330,9,170,53,48,8,Dessert,
+Strawberry Sundae,280,6,85,49,45,6,Dessert,
+McFlurry with OREO Cookies,340,11,170,53,43,8,Dessert,
+Hot Habanero,80,7,180,5,2,1,Sauce,
+Creamy Ranch Sauce,110,12,170,1,1,0,Sauce,
+Sweet & Sour Sauce,50,0,150,12,10,0,Sauce,
+Hotcake Syrup,180,0,20,45,21,0,Sauce,
+Honey Mustard Sauce,60,4,115,6,5,0,Sauce,
+Barbeque Sauce (BBQ),50,0,260,12,10,0,Sauce,
